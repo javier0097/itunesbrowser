@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { SearchComponent } from './components/search/search.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {provideHttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule
   ],
   providers: [
-    provideBrowserGlobalErrorListeners()
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient()
   ],
   bootstrap: [App]
 })
