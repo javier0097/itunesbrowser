@@ -1,0 +1,18 @@
+<div *ngFor="let element of elements" class="card mb-3 mt-4">
+  <div class="row g-0">
+    <div class="col-md-5">
+      <img [src]=element.artworkUrl100 class="rounded-start card-image" alt="resource thumbnail">
+    </div>
+    <div class="col-md-7">
+      <div class="card-body">
+        <h5 class="card-title">{{element.trackName}}</h5>
+        <p class="card-text"><small class="text-body-secondary">{{element.artistName}}</small></p>
+        <p class="card-text">{{element.collectionName}}</p>
+        <span class="fw-bold">Collection price:</span>
+        <p class="card-text">{{element.collectionPrice}}</p>
+        <span class="fw-bold">Track price:</span>
+        <p class="card-text">{{element.trackPrice}}</p>
+      </div>
+    </div>
+  </div>
+</div>

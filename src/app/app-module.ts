@@ -6,11 +6,13 @@ import { App } from './app';
 import { SearchComponent } from './components/search/search.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {provideHttpClient} from '@angular/common/http';
+import { ListCardComponent } from './components/list-card.component/list-card.component';
 
 @NgModule({
   declarations: [
     App,
-    SearchComponent
+    SearchComponent,
+    ListCardComponent
   ],
   imports: [
     BrowserModule,
