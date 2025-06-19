@@ -1,0 +1,5 @@
+<nav *ngIf="numPages > 1">
+  <ul class="pagination justify-content-center">
+    <li *ngFor="let i of pages" class="page-item" [ngClass]="{'active':selectedPage === i}" (click)="selectPage(i)"><a class="page-link" href="#">{{i}}</a></li>
+  </ul>
+</nav>
