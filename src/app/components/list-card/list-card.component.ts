@@ -14,7 +14,6 @@ export class ListCardComponent {
       this.elements = elements;
       this.sortElements()
       this.pages = Array.from({length: this.pagedElements.length}, (_, i) => i+1);
-      console.log(this.pagedElements);
     }
   }
 

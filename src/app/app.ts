@@ -19,12 +19,13 @@ export class App {
 
   public onSearch(params: SearchParams): void {
     this.itunesService.search(params)
-      .subscribe((response) => {
-        if (response.resultCount) {
-          this.elements = response.results;
-          this.noResults = false;
-        } else {
-          this.noResults = true;
+      .subscribe({
+        next: (response) => {
+          this.elements = response.resultCount ? response.results : [];
+          this.noResults = !response.resultCount;
+        },
+        error:(error) => {
+          console.error('Search failed:', error);
           this.elements = [];
         }
       });

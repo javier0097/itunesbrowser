@@ -9,23 +9,19 @@ import {SearchParams} from '../../interfaces/search-params';
   styleUrl: './search.component.css'
 })
 export class SearchComponent {
-  @Output() search:EventEmitter<SearchParams> = new EventEmitter();
+  @Output() searchSubmitted:EventEmitter<SearchParams> = new EventEmitter();
   searchForm: FormGroup;
-  searchText: FormControl;
-  resourceType: FormControl;
-  typeOptions: String[];
+  typeOptions: string[];
 
   constructor() {
     this.typeOptions = ['musicVideo', 'movie', 'podcast'];
-    this.searchText = new FormControl('', Validators.required);
-    this.resourceType= new FormControl(this.typeOptions[0]);
     this.searchForm = new FormGroup({
-      searchText: this.searchText,
-      resourceType: this.resourceType,
+      searchText: new FormControl('', Validators.required),
+      resourceType: new FormControl(this.typeOptions[0])
     });
   }
 
   public onSearch(): void {
-    this.search.emit(this.searchForm.value);
+    this.searchSubmitted.emit(this.searchForm.value);
   }
 }

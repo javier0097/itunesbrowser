@@ -8,16 +8,18 @@ import {SearchParams} from '../interfaces/search-params';
   providedIn: 'root'
 })
 export class ItunesService {
-  private baseUrl: string;
-  constructor(private http: HttpClient) {
-    this.baseUrl = 'https://itunes.apple.com/search?'
-  }
+  private readonly baseUrl = 'https://itunes.apple.com/search?'
+
+  constructor(private http: HttpClient) {}
 
   public search(params: SearchParams): Observable<ItunesResponse> {
+    if (!params.searchText || !params.resourceType) {
+      throw new Error('Incomplete search parameters');
+    }
     return this.http.get<ItunesResponse>(`${this.baseUrl}term=${this.prepareTermSearch(params.searchText)}&entity=${params.resourceType}`)
   }
 
   private prepareTermSearch(searchText: string): string {
-    return searchText.replace(' ', '+');
+    return encodeURIComponent(searchText.trim());
   }
 }
