@@ -16,7 +16,7 @@ export class SearchComponent {
   constructor() {
     this.typeOptions = ['musicVideo', 'movie', 'podcast'];
     this.searchForm = new FormGroup({
-      searchText: new FormControl('', Validators.required),
+      searchText: new FormControl('', [Validators.required, Validators.pattern(/\S+/)]),
       resourceType: new FormControl(this.typeOptions[0])
     });
   }
