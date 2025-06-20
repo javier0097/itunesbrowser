@@ -1,0 +1,35 @@
+<div *ngIf="elements.length" class="my-2">
+
+  <nav>
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{'active':descendingSelected}" (click)="changeOrder()"><a class="page-link" href="#">A-Z ↓</a></li>
+      <li class="page-item" [ngClass]="{'active':!descendingSelected}" (click)="changeOrder(false)"><a class="page-link" href="#">Z-A ↑</a></li>
+    </ul>
+  </nav>
+
+  <div *ngFor="let element of pagedElements[selectedPage-1]" class="card mb-3 mt-4">
+    <div class="row g-0">
+      <div class="col-md-3">
+        <img [src]="element.artworkUrl100 || 'default.png'" class="rounded-start card-image" alt="resource thumbnail">
+      </div>
+      <div class="col-md-9">
+        <div class="card-body">
+          <h5 class="card-title">{{element.trackName}}</h5>
+          <p class="card-text"><small class="text-body-secondary">{{element.artistName}}</small></p>
+          <p class="card-text">{{element.collectionName}}</p>
+          <div *ngIf="element.trackPrice">
+            <span class="fw-bold">Price:</span>
+            <p class="card-text">{{element.trackPrice}}$</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav *ngIf="pagedElements.length > 1">
+    <ul class="pagination justify-content-center">
+      <li *ngFor="let i of pages" class="page-item" [ngClass]="{'active':selectedPage === i}" (click)="selectPage(i)"><a class="page-link" href="#">{{i}}</a></li>
+    </ul>
+  </nav>
+
+</div>
