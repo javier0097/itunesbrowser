@@ -10,27 +10,15 @@ import {ItunesElement} from './interfaces/itunes-element';
   styleUrl: './app.css'
 })
 export class App {
-  elements: ItunesElement[][];
-  pageNumber: number;
+  elements: ItunesElement[];
   constructor(private itunesService: ItunesService) {
     this.elements = [];
-    this.pageNumber = 0;
   }
 
   public onSearch(params: SearchParams): void {
     this.itunesService.search(params.searchText, params.resourceType)
       .subscribe((response) => {
-        this.generatePages(response.results);
+        this.elements = response.results;
       });
-  }
-
-  public selectPage(pageNumber: number): void {
-    this.pageNumber = pageNumber;
-  }
-
-  private generatePages(elements: ItunesElement[]): void {
-    for (let i = 0; i < elements.length; i = i + 10) {
-        this.elements.push(elements.slice(i, i+10));
-    }
   }
 }

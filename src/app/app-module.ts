@@ -7,14 +7,12 @@ import { SearchComponent } from './components/search/search.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {provideHttpClient} from '@angular/common/http';
 import { ListCardComponent } from './components/list-card/list-card.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
     App,
     SearchComponent,
     ListCardComponent,
-    PaginationComponent
   ],
   imports: [
     BrowserModule,

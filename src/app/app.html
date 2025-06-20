@@ -1,5 +1,4 @@
 <div class="container">
   <search-component (search)="onSearch($event)"></search-component>
-  <list-card-component [elements]="elements[pageNumber]"></list-card-component>
-  <pagination-component [numPages]="elements.length" (onPageChange)="selectPage($event)"></pagination-component>
+  <list-card-component [elements]="elements"></list-card-component>
 </div>

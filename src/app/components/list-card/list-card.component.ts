@@ -8,9 +8,49 @@ import {ItunesElement} from '../../interfaces/itunes-element';
   styleUrl: './list-card.component.css'
 })
 export class ListCardComponent {
-  @Input() public elements: ItunesElement[];
+  @Input('elements') set setElements(elements: ItunesElement[]) {
+    if (elements && elements.length > 0) {
+      this.elements = elements;
+      this.sortElements()
+      this.pages = Array.from({length: this.pagedElements.length}, (_, i) => i+1);
+    }
+  }
+
+  elements: ItunesElement[];
+  pagedElements: ItunesElement[][];
+  pages: number[];
+  selectedPage: number;
+  descendingSelected: boolean;
 
   constructor() {
     this.elements = [];
+    this.pages = [];
+    this.selectedPage = 1;
+    this.pagedElements = [];
+    this.descendingSelected = false;
+  }
+
+  public selectPage(numPage: number) {
+    this.selectedPage = numPage;
+  }
+
+  public sortElements(descending: boolean = true): void {
+    if (this.descendingSelected !== descending){
+      this.elements.sort((a, b) =>
+        descending
+          ? a.trackName.localeCompare(b.trackName)
+          : b.trackName.localeCompare(a.trackName)
+      );
+      this.generatePages();
+      this.descendingSelected = descending;
+      this.selectedPage = 1;
+    }
+  }
+
+  private generatePages(): void {
+    this.pagedElements = []
+    for (let i = 0; i < this.elements.length; i = i + 10) {
+      this.pagedElements.push(this.elements.slice(i, i+10));
+    }
   }
 }
