@@ -3,6 +3,5 @@ export interface ItunesElement {
   collectionName: string;
   trackName: string;
   artistName: string;
-  collectionPrice: number;
   trackPrice: number;
 }

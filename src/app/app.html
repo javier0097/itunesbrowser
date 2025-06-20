@@ -1,4 +1,5 @@
 <div class="container">
   <search-component (search)="onSearch($event)"></search-component>
   <list-card-component [elements]="elements"></list-card-component>
+  <h1 *ngIf="noResults" class="text-center my-5">No results found</h1>
 </div>

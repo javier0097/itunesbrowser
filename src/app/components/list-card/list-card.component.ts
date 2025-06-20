@@ -9,10 +9,12 @@ import {ItunesElement} from '../../interfaces/itunes-element';
 })
 export class ListCardComponent {
   @Input('elements') set setElements(elements: ItunesElement[]) {
+    this.elements = [];
     if (elements && elements.length > 0) {
       this.elements = elements;
       this.sortElements()
       this.pages = Array.from({length: this.pagedElements.length}, (_, i) => i+1);
+      console.log(this.pagedElements);
     }
   }
 
@@ -35,15 +37,19 @@ export class ListCardComponent {
   }
 
   public sortElements(descending: boolean = true): void {
-    if (this.descendingSelected !== descending){
-      this.elements.sort((a, b) =>
-        descending
-          ? a.trackName.localeCompare(b.trackName)
-          : b.trackName.localeCompare(a.trackName)
-      );
-      this.generatePages();
-      this.descendingSelected = descending;
-      this.selectedPage = 1;
+    this.elements.sort((a, b) =>
+      descending
+        ? a.trackName.localeCompare(b.trackName)
+        : b.trackName.localeCompare(a.trackName)
+    );
+    this.generatePages();
+    this.descendingSelected = descending;
+    this.selectedPage = 1;
+  }
+
+  public changeOrder(descending: boolean = true): void {
+    if (this.descendingSelected !== descending) {
+      this.sortElements(descending);
     }
   }
 

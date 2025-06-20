@@ -11,14 +11,22 @@ import {ItunesElement} from './interfaces/itunes-element';
 })
 export class App {
   elements: ItunesElement[];
+  noResults: boolean;
   constructor(private itunesService: ItunesService) {
     this.elements = [];
+    this.noResults = false;
   }
 
   public onSearch(params: SearchParams): void {
     this.itunesService.search(params.searchText, params.resourceType)
       .subscribe((response) => {
-        this.elements = response.results;
+        if (response.resultCount) {
+          this.elements = response.results;
+          this.noResults = false;
+        } else {
+          this.noResults = true;
+          this.elements = [];
+        }
       });
   }
 }

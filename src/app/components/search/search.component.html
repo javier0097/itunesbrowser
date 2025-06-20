@@ -7,5 +7,5 @@
       <option *ngFor="let option of typeOptions;" [value]="option">{{option}}</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary col-1 search-button">Search</button>
+  <button type="submit" class="btn btn-primary col-1 search-button" [disabled]="searchForm.invalid">Search</button>
 </form>

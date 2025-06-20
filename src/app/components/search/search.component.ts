@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {ItunesElement} from '../../interfaces/itunes-element';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SearchParams} from '../../interfaces/search-params';
 
 @Component({
@@ -18,7 +17,7 @@ export class SearchComponent {
 
   constructor() {
     this.typeOptions = ['musicVideo', 'movie', 'podcast'];
-    this.searchText = new FormControl('');
+    this.searchText = new FormControl('', Validators.required);
     this.resourceType= new FormControl(this.typeOptions[0]);
     this.searchForm = new FormGroup({
       searchText: this.searchText,
