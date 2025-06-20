@@ -18,7 +18,7 @@ export class App {
   }
 
   public onSearch(params: SearchParams): void {
-    this.itunesService.search(params.searchText, params.resourceType)
+    this.itunesService.search(params)
       .subscribe((response) => {
         if (response.resultCount) {
           this.elements = response.results;

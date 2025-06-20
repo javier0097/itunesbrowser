@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ItunesResponse} from '../interfaces/itunes-response';
+import {SearchParams} from '../interfaces/search-params';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class ItunesService {
     this.baseUrl = 'https://itunes.apple.com/search?'
   }
 
-  public search(searchText: string, type: string): Observable<ItunesResponse> {
-    return this.http.get<ItunesResponse>(`${this.baseUrl}term=${this.prepareTermSearch(searchText)}&entity=${type}`)
+  public search(params: SearchParams): Observable<ItunesResponse> {
+    return this.http.get<ItunesResponse>(`${this.baseUrl}term=${this.prepareTermSearch(params.searchText)}&entity=${params.resourceType}`)
   }
 
   private prepareTermSearch(searchText: string): string {
